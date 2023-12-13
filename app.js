@@ -3,9 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { errors } = require('celebrate');
+const { default: helmet } = require('helmet');
 const { MONGO_URI, PORT } = require('./config');
-const NotFoundError = require('./utils/errors/NotFound');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
+const notFoundHandler = require('./middlewares/notFoundHandler');
+const { handleRequest } = require('./middlewares/rateLimiter');
 
 const app = express();
 
@@ -23,15 +25,17 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(MONGO_URI);
 
+app.use(helmet());
+
 app.use(requestLogger);
+
+app.use(handleRequest);
 
 app.use('/', require('./routes/auth'));
 
 app.use('/', require('./routes/index'));
 
-app.all('*', (req, res, next) => {
-  next(new NotFoundError('Ошибка пути'));
-});
+app.use(notFoundHandler);
 
 app.use(errorLogger);
 

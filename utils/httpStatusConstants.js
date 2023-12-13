@@ -1,6 +1,7 @@
 const http2 = require('http2');
 
 module.exports.INTERNAL_SERVER_500 = http2.constants.HTTP_STATUS_INTERNAL_SERVER_ERROR;
+module.exports.TOO_MANY_REQUESTS_429 = http2.constants.HTTP_STATUS_TOO_MANY_REQUESTS;
 module.exports.STATUS_CONFLICT_409 = http2.constants.HTTP_STATUS_CONFLICT;
 module.exports.NOT_FOUND_404 = http2.constants.HTTP_STATUS_NOT_FOUND;
 module.exports.FORBIDDEN_403 = http2.constants.HTTP_STATUS_FORBIDDEN;
