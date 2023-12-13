@@ -28,7 +28,6 @@ mongoose.connect(MONGO_URI);
 
 app.use(helmet());
 
-// Защита запросов
 app.use(requestLogger);
 
 app.use(handleRequest);
