@@ -15,6 +15,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',
+      'https://filmsmafnifico.nomoredomainsmonster.ru',
     ],
     credentials: true, // Разрешаем отправку куки и авторизационных заголовков
   }),
